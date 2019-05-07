@@ -1,0 +1,61 @@
+{
+  "ConnectionStrings": {
+    "lkmo": "Server=SERVICES-SQL;Database=lkmo;User Id=mo;Password=momomo;Max Pool Size=200;",
+    "wau": "sqlsrv:server=SERVICES-SQL;Database=disp_test;User Id=asp_user;Password=260306;",
+    "info": {
+      "dsn": "sqlsrv:server=eosdb;Database=InfoTest;",
+      "User": "asp_user",
+      "Password": "260306"
+    },
+    "rmr": "Server=SERVICES-SQL;Database=RMR;User Id=asp_user;Password=260306;",
+    "infoserv": {
+      "dsn": "sqlsrv:server=SERVICES-SQL;Database=Info;",
+      "User": "soaphandler",
+      "Password": "soapsoap"
+    },
+    "disp": {
+      "dsn": "sqlsrv:server=SERVICES-SQL;Database=disp_test;",
+      "User": "soaphandler",
+      "Password": "soapsoap"
+    }
+  },
+  "ActionConfiguration": {
+    "POST": [
+      {
+        "Path": "OSP",
+        "Procedure": "api.ExecuteOSP",
+        "Connection": "infoserv",
+        "SchemaXSD": ""
+      },
+      {
+        "Path": "Obs/observation",
+        "Procedure": "[api].[post_obs_observation]",
+        "Connection": "disp",
+        "SchemaXSD": ""
+      }
+    ],
+    "GET": [
+      {
+        "Path": "Obs",
+        "Procedure": "[api].[Get_Obs_Observations]",
+        "Connection": "disp",
+        "SchemaXSD": ""
+      },
+      {
+        "Path": "Obs/specialities",
+        "Procedure": "[api].[get_obs_specialities]",
+        "Connection": "disp"
+      },
+      {
+        "Path": "Obs/reasons",
+        "Procedure": "[api].[get_obs_reasons]",
+        "Connection": "disp"
+      },
+      {
+        "Path": "Relation/Profile",
+        "Procedure": "Spr.p_GetProfiles",
+        "Connection": "info"
+      }
+    ]
+  }
+}
